@@ -1,0 +1,46 @@
+{
+  "_id": {
+    "$oid": "69c7854473483b364682c7bb"
+  },
+  "fullName": "Aman Verma Updated",
+  "email": "aman1@example.com",
+  "phone": "9876543210",
+  "walletBalance": 200,
+  "isBlocked": true,
+  "kycStatus": "Pending",
+  "deviceInfo": {
+    "ipAddress": "192.168.1.1",
+    "deviceType": "Mobile",
+    "os": "Android"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-03-28T07:37:40.129Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T07:39:17.085Z"
+  }
+}
+{
+  "_id": {
+    "$oid": "69c7854473483b364682c7bc"
+  },
+  "fullName": "Riya Sharma",
+  "email": "riya1@example.com",
+  "phone": "9876543211",
+  "walletBalance": 50,
+  "isBlocked": false,
+  "kycStatus": "Approved",
+  "deviceInfo": {
+    "ipAddress": "192.168.1.2",
+    "deviceType": "Desktop",
+    "os": "Windows"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-03-28T07:37:40.132Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T07:39:17.085Z"
+  }
+}

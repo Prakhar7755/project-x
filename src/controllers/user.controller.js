@@ -4,8 +4,29 @@ const bulkCreateUsers = async (req, res) => {
   try {
     const users = req.body;
 
-    if (!Array.isArray(users)) {
-      return res.status(400).json({ message: "Input must be an array" });
+    // Check for duplicate emails in input
+    const emailsInInput = users.map((u) => u.email.toLowerCase());
+    const uniqueEmails = new Set(emailsInInput);
+    if (emailsInInput.length !== uniqueEmails.size) {
+      return res.status(400).json({
+        success: false,
+        message: "Duplicate emails found in request body",
+      });
+    }
+
+    // Check if emails already exist in database
+    const existingEmails = await User.find(
+      { email: { $in: emailsInInput } },
+      { email: 1 },
+    );
+
+    if (existingEmails.length > 0) {
+      const duplicateEmails = existingEmails.map((u) => u.email);
+      return res.status(400).json({
+        success: false,
+        message: "Some emails already exist in database",
+        duplicateEmails,
+      });
     }
 
     const result = await User.insertMany(users, {
@@ -28,10 +49,6 @@ const bulkCreateUsers = async (req, res) => {
 const bulkUpdateUsers = async (req, res) => {
   try {
     const updates = req.body;
-
-    if (!Array.isArray(updates)) {
-      return res.status(400).json({ message: "Input must be an array" });
-    }
 
     const operations = updates.map((user) => ({
       updateOne: {

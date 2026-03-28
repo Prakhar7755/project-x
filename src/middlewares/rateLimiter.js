@@ -1,0 +1,13 @@
+import rateLimit from "express-rate-limit";
+
+// Limit bulk APIs to prevent overload
+export const bulkApiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 500, // max 500 requests per window per IP
+  message: {
+    success: false,
+    message: "Too many requests from this IP, please try again later.",
+  },
+  standardHeaders: true, // return rate limit info in headers
+  legacyHeaders: false,
+});
